@@ -85,14 +85,15 @@ class App(object):
             return False
 
     def build(self, platform=None, release=False):
-        release_flag = ''
-        platform_flag = platform or ''
-        if release:
-            release_flag = '--release'
+        cmd_params = ['cordova', 'build']
 
-        return_code = subprocess.call([
-            'cordova', 'build', platform_flag, release_flag
-        ])
+        if platform:
+            cmd_params.append(platform)
+
+        if release:
+            cmd_params.append('--release')
+
+        return_code = subprocess.call(cmd_params)
 
         if return_code == 0:
             if platform:
