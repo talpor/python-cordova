@@ -12,7 +12,7 @@ from .decorators import for_all_methods, chdir_context
 BUILD_LOCATION = {
     'android': {
         'debug': 'platforms/android/ant-build/%s-debug.apk',
-        'release': 'platforms/android/ant-build/%s-release-unsigned.apk'
+        'release': 'platforms/android/ant-build/%s-release-unsigned.apk',
         'archive': 'platforms/%s-android.zip'
     },
     'ios': {
