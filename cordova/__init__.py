@@ -3,6 +3,7 @@ from __future__ import absolute_import
 __version__ = '0.1'
 
 import os
+import re
 import subprocess
 
 from .decorators import for_all_methods, chdir_context
@@ -12,10 +13,12 @@ BUILD_LOCATION = {
     'android': {
         'debug': 'platforms/android/ant-build/%s-debug.apk',
         'release': 'platforms/android/ant-build/%s-release-unsigned.apk'
+        'archive': 'platforms/%s-android.zip'
     },
     'ios': {
         'debug': 'platforms/ios/build/emulator/%s.app',
         'release': 'platforms/ios/build/emulator/%s.app',
+        'archive': 'platforms/%s-ios.zip'
     }
 }
 
@@ -97,14 +100,16 @@ class App(object):
 
         if return_code == 0:
             if platform:
-                return os.path.join(
+                return [os.path.join(
                     path,
                     BUILD_LOCATION[platform]
                     ['release' if release else 'debug'] % (
                         self.name
-                    )
-                )
+                    ))
+                ]
             else:
+                platforms = self.installed_platform_list()
+                for platform
                 return True
         else:
             return False
