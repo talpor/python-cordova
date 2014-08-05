@@ -87,11 +87,8 @@ class App(object):
         else:
             return False
 
-    def build(self, platform=None, release=False):
-        cmd_params = ['cordova', 'build']
-
-        if platform:
-            cmd_params.append(platform)
+    def build(self, platform, release=False):
+        cmd_params = ['cordova', 'build', platform]
 
         if release:
             cmd_params.append('--release')
@@ -99,18 +96,13 @@ class App(object):
         return_code = subprocess.call(cmd_params)
 
         if return_code == 0:
-            if platform:
-                return [os.path.join(
-                    path,
-                    BUILD_LOCATION[platform]
-                    ['release' if release else 'debug'] % (
-                        self.name
-                    ))
-                ]
-            else:
-                platforms = self.installed_platform_list()
-                for platform
-                return True
+            return [os.path.join(
+                path,
+                BUILD_LOCATION[platform]
+                ['release' if release else 'debug'] % (
+                    self.name
+                ))
+            ]
         else:
             return False
 
