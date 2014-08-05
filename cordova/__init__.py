@@ -97,7 +97,7 @@ class App(object):
 
         if return_code == 0:
             return [os.path.join(
-                path,
+                self.path,
                 BUILD_LOCATION[platform]
                 ['release' if release else 'debug'] % (
                     self.name
